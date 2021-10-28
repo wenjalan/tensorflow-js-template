@@ -34,6 +34,12 @@ async function train(modelDirectory = DEFAULT_MODEL_SAVE_DIRECTORY) {
     // save the model
     await model.save(modelDirectory);
     console.log('Saved model to ' + modelDirectory + '.');
+
+    // optional: evaluate the model
+    console.log('Evaluating model...');
+    const results = await model.evaluate(testXs, testYs);
+    console.log('> Loss: ' + results[0].dataSync()[0]);
+    console.log('> Accuracy: ' + results[1].dataSync()[0]);
 }
 
 // returns a sequential model
